@@ -1,0 +1,3 @@
+Remove the upgrade step that adds the `exclude_from_nav` index.
+At freitag.de we do not need it.
+[gforcada]
