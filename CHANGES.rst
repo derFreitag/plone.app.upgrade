@@ -8,6 +8,17 @@ Changelog
 
 .. towncrier release notes start
 
+2.0.31.post0 (2020-02-12)
+-------------------------
+
+Bug fixes:
+
+
+- Remove the upgrade step that adds the `exclude_from_nav` index.
+  At freitag.de we do not need it.
+  [gforcada] (#1)
+
+
 2.0.31 (2019-12-15)
 -------------------
 
