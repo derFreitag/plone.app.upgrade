@@ -16,23 +16,6 @@ import sys
 logger = logging.getLogger('plone.app.upgrade')
 
 
-def add_exclude_from_nav_index(context):
-    """Add exclude_from_nav index to the portal_catalog.
-    """
-    name = 'exclude_from_nav'
-    meta_type = 'BooleanIndex'
-    catalog = getToolByName(context, 'portal_catalog')
-    indexes = catalog.indexes()
-    indexables = []
-    if name not in indexes:
-        catalog.addIndex(name, meta_type)
-        indexables.append(name)
-        logger.info('Added %s for field %s.', meta_type, name)
-    if len(indexables) > 0:
-        logger.info('Indexing new indexes %s.', ', '.join(indexables))
-        catalog.manage_reindexIndex(ids=indexables)
-
-
 def remove_legacy_resource_registries(context):
     """Remove portal_css and portal_javascripts."""
     portal_url = getToolByName(context, 'portal_url')
@@ -125,7 +108,6 @@ def to52beta1(context):
         del sys.modules[mod_name]
     del sys.modules[FAKE_RR_PATH]
     delattr(sys.modules[fake_mods[0]], fake_mods[1])
-    add_exclude_from_nav_index(context)
     remove_legacy_resource_registries(context)
     remove_interface_indexes_from_relations_catalog()
     # Make sure plone.staticresources is installed
